@@ -18,4 +18,14 @@ public class Carro {
     public Carro(Motor motor) {
         this.motor = motor;
     }
+
+
+
+    public CarroStatus darIgnicao(Chave chave) {
+        if(chave.getMontadora() != this.montadora) {
+            return new CarroStatus("Nao é possível ligar o carro");
+        }
+        return new CarroStatus("Carro ligado" + motor);
+    }
 }
+
