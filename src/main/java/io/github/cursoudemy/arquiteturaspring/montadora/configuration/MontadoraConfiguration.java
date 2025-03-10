@@ -25,7 +25,7 @@ public class MontadoraConfiguration {
 
 
     @Bean (name = "motorEletrico")
-    @Primary
+
     public Motor motorEletrico() {
         var motor = new Motor();
         motor.setCavalos(100);
@@ -38,6 +38,7 @@ public class MontadoraConfiguration {
     }
 
     @Bean(name = "motorTurbo")
+    @Primary
     public Motor motorTurbo() {
         var motor = new Motor();
         motor.setCavalos(180);

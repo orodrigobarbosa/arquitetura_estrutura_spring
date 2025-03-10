@@ -2,7 +2,9 @@ package io.github.cursoudemy.arquiteturaspring.todo;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @AllArgsConstructor
 @RestController
@@ -14,7 +16,12 @@ public class TodoController {
 
     @PostMapping
     public TodoEntity addTodo(@RequestBody TodoEntity todo) {
-        return service.salvar(todo);
+        try {
+            return this.service.salvar(todo);
+        }catch (IllegalArgumentException e){
+            var mensagemErro = e.getMessage();
+            throw new ResponseStatusException(HttpStatus.CONFLICT, mensagemErro);
+        }
     }
 
     @PutMapping("/{id}")
